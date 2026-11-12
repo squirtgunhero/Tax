@@ -1,0 +1,230 @@
+{
+  "checkedAt": "2026-11-12T22:07:44.021Z",
+  "base": "http://localhost:3000",
+  "report": [
+    {
+      "path": "/api/sources/status",
+      "status": 200,
+      "passed": true,
+      "durationMs": 428
+    },
+    {
+      "path": "/api/treasury/debt",
+      "status": 200,
+      "passed": true,
+      "durationMs": 948,
+      "source": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_to_penny?sort=-record_date&page[size]=1",
+      "period": "2026-11-10"
+    },
+    {
+      "path": "/api/treasury/fiscal?year=2025",
+      "status": 200,
+      "passed": true,
+      "durationMs": 1295,
+      "source": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/mts/mts_table_2?filter=record_date:eq:2025-09-30&page[size]=100",
+      "period": "2024-10-01 through 2025-09-30"
+    },
+    {
+      "path": "/api/treasury/fiscal?year=2026",
+      "status": 200,
+      "passed": true,
+      "durationMs": 1110,
+      "source": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/mts/mts_table_2?filter=record_date:eq:2026-09-30&page[size]=100",
+      "period": "2025-10-01 through 2026-09-30"
+    },
+    {
+      "path": "/api/treasury/fiscal?year=2027",
+      "status": 200,
+      "passed": true,
+      "durationMs": 1090,
+      "source": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/mts/mts_table_2?filter=record_date:eq:2026-10-31&page[size]=100",
+      "period": "2026-10-01 through 2026-10-31"
+    },
+    {
+      "path": "/api/federal/awards?year=2025",
+      "status": 200,
+      "passed": true,
+      "durationMs": 521,
+      "source": "https://api.usaspending.gov/api/v2/search/spending_by_award/",
+      "period": "Federal FY 2025 (October–September)",
+      "records": 20
+    },
+    {
+      "path": "/api/federal/awards?year=2025&page=2",
+      "status": 200,
+      "passed": true,
+      "durationMs": 188,
+      "source": "https://api.usaspending.gov/api/v2/search/spending_by_award/",
+      "period": "Federal FY 2025 (October–September)",
+      "records": 20
+    },
+    {
+      "path": "/api/federal/awards?year=2025&category=grants&state=NJ",
+      "status": 200,
+      "passed": true,
+      "durationMs": 189,
+      "source": "https://api.usaspending.gov/api/v2/search/spending_by_award/",
+      "period": "Federal FY 2025 (October–September)",
+      "records": 20
+    },
+    {
+      "path": "/api/federal/awards?year=2025&agency=Department%20of%20Energy&recipient=Laboratory",
+      "status": 200,
+      "passed": true,
+      "durationMs": 195,
+      "source": "https://api.usaspending.gov/api/v2/search/spending_by_award/",
+      "period": "Federal FY 2025 (October–September)",
+      "records": 4
+    },
+    {
+      "path": "/api/federal/awards?year=2025&category=loans",
+      "status": 200,
+      "passed": true,
+      "durationMs": 155,
+      "source": "https://api.usaspending.gov/api/v2/search/spending_by_award/",
+      "period": "Federal FY 2025 (October–September)",
+      "records": 20
+    },
+    {
+      "path": "/api/federal/awards?year=2025&category=payments",
+      "status": 200,
+      "passed": true,
+      "durationMs": 202,
+      "source": "https://api.usaspending.gov/api/v2/search/spending_by_award/",
+      "period": "Federal FY 2025 (October–September)",
+      "records": 20
+    },
+    {
+      "path": "/api/federal/awards?year=2025&category=other",
+      "status": 200,
+      "passed": true,
+      "durationMs": 210,
+      "source": "https://api.usaspending.gov/api/v2/search/spending_by_award/",
+      "period": "Federal FY 2025 (October–September)",
+      "records": 20
+    },
+    {
+      "path": "/api/nj/finances",
+      "status": 200,
+      "passed": true,
+      "durationMs": 14297,
+      "source": "https://data.nj.gov/d/whpi-savb",
+      "period": "NJ FY 2025 (2024-07-01 through 2025-06-30)",
+      "records": 20
+    },
+    {
+      "path": "/api/nj/finances?kind=revenue",
+      "status": 200,
+      "passed": true,
+      "durationMs": 1364,
+      "source": "https://data.nj.gov/d/sk3g-zv89",
+      "period": "NJ FY 2025 (2024-07-01 through 2025-06-30)",
+      "records": 20
+    },
+    {
+      "path": "/api/nj/finances?year=2024&page=2&q=health",
+      "status": 200,
+      "passed": true,
+      "durationMs": 1555,
+      "source": "https://data.nj.gov/d/whpi-savb",
+      "period": "NJ FY 2024 (2023-07-01 through 2024-06-30)",
+      "records": 20
+    },
+    {
+      "path": "/api/nj/publications",
+      "status": 200,
+      "passed": true,
+      "durationMs": 8,
+      "source": "https://www.nj.gov/treasury/omb/",
+      "period": "As linked by OMB"
+    },
+    {
+      "path": "/api/federal/bill?congress=119&type=hr&number=1",
+      "status": 200,
+      "passed": true,
+      "durationMs": 11,
+      "source": "https://www.govinfo.gov/bulkdata/BILLSTATUS/119/hr/BILLSTATUS-119hr1.xml",
+      "period": "2026-05-08T14:41:30Z"
+    },
+    {
+      "path": "/api/federal/bill?congress=119&type=s&number=5",
+      "status": 200,
+      "passed": true,
+      "durationMs": 174,
+      "source": "https://www.govinfo.gov/bulkdata/BILLSTATUS/119/s/BILLSTATUS-119s5.xml",
+      "period": "2026-10-22T21:23:22Z"
+    },
+    {
+      "path": "/api/federal/bill?congress=119&type=s&number=99999",
+      "status": 404,
+      "passed": true,
+      "durationMs": 181,
+      "code": "UPSTREAM_404"
+    },
+    {
+      "path": "/api/federal/vote?chamber=House&congress=119&session=1&roll=190",
+      "status": 200,
+      "passed": true,
+      "durationMs": 6,
+      "source": "https://clerk.house.gov/evs/2025/roll190.xml",
+      "period": "3-Jul-2025"
+    },
+    {
+      "path": "/api/federal/vote?chamber=Senate&congress=119&session=1&roll=370",
+      "status": 200,
+      "passed": true,
+      "durationMs": 551,
+      "source": "https://www.senate.gov/legislative/LIS/roll_call_votes/vote1191/vote_119_1_00370.xml",
+      "period": "July 1, 2025,  11:37 AM"
+    },
+    {
+      "path": "/api/federal/bills",
+      "status": 503,
+      "passed": true,
+      "durationMs": 14,
+      "code": "CONFIGURATION_REQUIRED"
+    },
+    {
+      "path": "/api/federal/awards?year=abc",
+      "status": 400,
+      "passed": true,
+      "durationMs": 6,
+      "code": "INVALID_QUERY"
+    },
+    {
+      "path": "/api/federal/awards?page=0",
+      "status": 400,
+      "passed": true,
+      "durationMs": 4,
+      "code": "INVALID_QUERY"
+    },
+    {
+      "path": "/api/nj/finances?year=2100",
+      "status": 404,
+      "passed": true,
+      "durationMs": 258,
+      "code": "YEAR_UNAVAILABLE"
+    },
+    {
+      "path": "/api/federal/bill?number=-1",
+      "status": 400,
+      "passed": true,
+      "durationMs": 6,
+      "code": "INVALID_QUERY"
+    },
+    {
+      "path": "/api/federal/bill?number=1&type=invalid",
+      "status": 400,
+      "passed": true,
+      "durationMs": 5,
+      "code": "INVALID_QUERY"
+    },
+    {
+      "path": "/api/treasury/fiscal?year=2100",
+      "status": 404,
+      "passed": true,
+      "durationMs": 277,
+      "code": "NO_DATA"
+    }
+  ]
+}

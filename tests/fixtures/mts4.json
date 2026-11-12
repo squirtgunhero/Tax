@@ -1,1 +1,402 @@
-[{"parent_id": "null", "classification_id": "59758421", "classification_desc": "Individual Income Taxes", "current_fytd_net_rcpt_amt": "null", "data_type_cd": "D", "sequence_level_nbr": "1"}, {"parent_id": "59758421", "classification_id": "59758422", "classification_desc": "Withheld", "current_fytd_net_rcpt_amt": "null", "data_type_cd": "D", "sequence_level_nbr": "2"}, {"parent_id": "59758421", "classification_id": "59758426", "classification_desc": "Presidential Election Campaign Fund", "current_fytd_net_rcpt_amt": "null", "data_type_cd": "D", "sequence_level_nbr": "2"}, {"parent_id": "59758421", "classification_id": "59758427", "classification_desc": "Other", "current_fytd_net_rcpt_amt": "null", "data_type_cd": "D", "sequence_level_nbr": "2"}, {"parent_id": "59758421", "classification_id": "59758429", "classification_desc": "Total -- Individual Income Taxes", "current_fytd_net_rcpt_amt": "186376346288.16", "data_type_cd": "T", "sequence_level_nbr": "2"}, {"parent_id": "null", "classification_id": "59758430", "classification_desc": "Corporation Income Taxes", "current_fytd_net_rcpt_amt": "18042284142.96", "data_type_cd": "D", "sequence_level_nbr": "1"}, {"parent_id": "null", "classification_id": "59758434", "classification_desc": "Social Insurance and Retirement Receipts:", "current_fytd_net_rcpt_amt": "null", "data_type_cd": "S", "sequence_level_nbr": "1"}, {"parent_id": "59758434", "classification_id": "59758436", "classification_desc": "Employment and General Retirement:", "current_fytd_net_rcpt_amt": "null", "data_type_cd": "S", "sequence_level_nbr": "2"}, {"parent_id": "59758436", "classification_id": "59758439", "classification_desc": "Federal Old-Age and Survivors Insurance Trust Fund:", "current_fytd_net_rcpt_amt": "null", "data_type_cd": "S", "sequence_level_nbr": "3"}, {"parent_id": "59758439", "classification_id": "59758440", "classification_desc": "Federal Insurance Contributions Act Taxes", "current_fytd_net_rcpt_amt": "80826000000.00", "data_type_cd": "D", "sequence_level_nbr": "4"}, {"parent_id": "59758439", "classification_id": "59758444", "classification_desc": "Self-Employment Contributions Act Taxes", "current_fytd_net_rcpt_amt": "362000000.00", "data_type_cd": "D", "sequence_level_nbr": "4"}, {"parent_id": "59758439", "classification_id": "59758457", "classification_desc": "Total -- Federal Old-Age and Survivors Insurance Trust Fund", "current_fytd_net_rcpt_amt": "81188000000.00", "data_type_cd": "T", "sequence_level_nbr": "4"}, {"parent_id": "59758436", "classification_id": "59758461", "classification_desc": "Federal Disability Insurance Trust Fund:", "current_fytd_net_rcpt_amt": "null", "data_type_cd": "S", "sequence_level_nbr": "3"}, {"parent_id": "59758461", "classification_id": "59758465", "classification_desc": "Federal Insurance Contributions Act Taxes", "current_fytd_net_rcpt_amt": "13726000000.00", "data_type_cd": "D", "sequence_level_nbr": "4"}, {"parent_id": "59758461", "classification_id": "59758470", "classification_desc": "Self-Employment Contributions Act Taxes", "current_fytd_net_rcpt_amt": "61000000.00", "data_type_cd": "D", "sequence_level_nbr": "4"}, {"parent_id": "59758461", "classification_id": "59758484", "classification_desc": "Total -- Federal Disability Insurance Trust Fund", "current_fytd_net_rcpt_amt": "13787000000.00", "data_type_cd": "T", "sequence_level_nbr": "4"}, {"parent_id": "59758436", "classification_id": "59758488", "classification_desc": "Federal Hospital Insurance Trust Fund:", "current_fytd_net_rcpt_amt": "null", "data_type_cd": "S", "sequence_level_nbr": "3"}, {"parent_id": "59758488", "classification_id": "59758493", "classification_desc": "Federal Insurance Contributions Act Taxes", "current_fytd_net_rcpt_amt": "32876000000.00", "data_type_cd": "D", "sequence_level_nbr": "4"}, {"parent_id": "59758488", "classification_id": "59758494", "classification_desc": "Self-Employment Contributions Act Taxes", "current_fytd_net_rcpt_amt": "184000000.00", "data_type_cd": "D", "sequence_level_nbr": "4"}, {"parent_id": "59758488", "classification_id": "59758510", "classification_desc": "Total -- Federal Hospital Insurance Trust Fund", "current_fytd_net_rcpt_amt": "33060000000.00", "data_type_cd": "T", "sequence_level_nbr": "4"}, {"parent_id": "59758436", "classification_id": "59758513", "classification_desc": "Railroad Retirement:", "current_fytd_net_rcpt_amt": "null", "data_type_cd": "S", "sequence_level_nbr": "3"}, {"parent_id": "59758513", "classification_id": "59758516", "classification_desc": "Rail Pension and Supplemental Annuity", "current_fytd_net_rcpt_amt": "286778372.19", "data_type_cd": "D", "sequence_level_nbr": "4"}, {"parent_id": "59758513", "classification_id": "59758519", "classification_desc": "Social Security Equivalent Account", "current_fytd_net_rcpt_amt": "304569666.28", "data_type_cd": "D", "sequence_level_nbr": "4"}, {"parent_id": "59758436", "classification_id": "59758522", "classification_desc": "Total -- Employment and General Retirement", "current_fytd_net_rcpt_amt": "128626348038.47", "data_type_cd": "T", "sequence_level_nbr": "3"}, {"parent_id": "59758434", "classification_id": "59758525", "classification_desc": "Unemployment Insurance:", "current_fytd_net_rcpt_amt": "null", "data_type_cd": "S", "sequence_level_nbr": "2"}, {"parent_id": "59758525", "classification_id": "59758527", "classification_desc": "Deposits by States", "current_fytd_net_rcpt_amt": "1986800637.11", "data_type_cd": "D", "sequence_level_nbr": "3"}, {"parent_id": "59758525", "classification_id": "59758530", "classification_desc": "Federal Unemployment Taxes", "current_fytd_net_rcpt_amt": "157378436.66", "data_type_cd": "D", "sequence_level_nbr": "3"}, {"parent_id": "59758525", "classification_id": "59758533", "classification_desc": "Railroad Unemployment Taxes", "current_fytd_net_rcpt_amt": "6166514.16", "data_type_cd": "D", "sequence_level_nbr": "3"}, {"parent_id": "59758525", "classification_id": "59758539", "classification_desc": "Total -- Unemployment Insurance", "current_fytd_net_rcpt_amt": "2150345587.93", "data_type_cd": "T", "sequence_level_nbr": "3"}, {"parent_id": "59758434", "classification_id": "59758542", "classification_desc": "Other Retirement:", "current_fytd_net_rcpt_amt": "null", "data_type_cd": "S", "sequence_level_nbr": "2"}, {"parent_id": "59758542", "classification_id": "59758545", "classification_desc": "Federal Employees' Retirement--Employee Share", "current_fytd_net_rcpt_amt": "694838009.58", "data_type_cd": "D", "sequence_level_nbr": "3"}, {"parent_id": "59758542", "classification_id": "59758548", "classification_desc": "Non-Federal Employees Retirement", "current_fytd_net_rcpt_amt": "2601813.51", "data_type_cd": "D", "sequence_level_nbr": "3"}, {"parent_id": "59758542", "classification_id": "59758551", "classification_desc": "Total -- Other Retirement", "current_fytd_net_rcpt_amt": "697439823.09", "data_type_cd": "T", "sequence_level_nbr": "3"}, {"parent_id": "59758434", "classification_id": "59758554", "classification_desc": "Total -- Social Insurance and Retirement Receipts", "current_fytd_net_rcpt_amt": "131474133449.49", "data_type_cd": "T", "sequence_level_nbr": "2"}, {"parent_id": "null", "classification_id": "59758557", "classification_desc": "Excise Taxes:", "current_fytd_net_rcpt_amt": "null", "data_type_cd": "S", "sequence_level_nbr": "1"}, {"parent_id": "59758557", "classification_id": "59758561", "classification_desc": "Miscellaneous Excise Taxes", "current_fytd_net_rcpt_amt": "4302598914.87", "data_type_cd": "D", "sequence_level_nbr": "2"}, {"parent_id": "59758557", "classification_id": "59758564", "classification_desc": "Airport and Airway Trust Fund", "current_fytd_net_rcpt_amt": "648170000.00", "data_type_cd": "D", "sequence_level_nbr": "2"}, {"parent_id": "59758557", "classification_id": "59758567", "classification_desc": "Highway Trust Fund", "current_fytd_net_rcpt_amt": "973525140.34", "data_type_cd": "D", "sequence_level_nbr": "2"}, {"parent_id": "59758557", "classification_id": "59758570", "classification_desc": "Black Lung Disability Trust Fund", "current_fytd_net_rcpt_amt": "5201000.00", "data_type_cd": "D", "sequence_level_nbr": "2"}, {"parent_id": "59758557", "classification_id": "59758573", "classification_desc": "Total -- Excise Taxes", "current_fytd_net_rcpt_amt": "5929495055.21", "data_type_cd": "T", "sequence_level_nbr": "2"}, {"parent_id": "null", "classification_id": "59758576", "classification_desc": "Estate and Gift Taxes", "current_fytd_net_rcpt_amt": "3765792152.82", "data_type_cd": "D", "sequence_level_nbr": "1"}, {"parent_id": "null", "classification_id": "59758578", "classification_desc": "Customs Duties", "current_fytd_net_rcpt_amt": "19217228460.18", "data_type_cd": "D", "sequence_level_nbr": "1"}, {"parent_id": "null", "classification_id": "59758580", "classification_desc": "Miscellaneous Receipts:", "current_fytd_net_rcpt_amt": "null", "data_type_cd": "S", "sequence_level_nbr": "1"}, {"parent_id": "59758580", "classification_id": "59758583", "classification_desc": "Deposit of Earnings, Federal Reserve System", "current_fytd_net_rcpt_amt": "989489867.11", "data_type_cd": "D", "sequence_level_nbr": "2"}, {"parent_id": "59758580", "classification_id": "59758585", "classification_desc": "Universal Service Fund", "current_fytd_net_rcpt_amt": "622480786.67", "data_type_cd": "D", "sequence_level_nbr": "2"}, {"parent_id": "59758580", "classification_id": "59758588", "classification_desc": "All Other", "current_fytd_net_rcpt_amt": "2522868400.17", "data_type_cd": "D", "sequence_level_nbr": "2"}, {"parent_id": "59758580", "classification_id": "59758590", "classification_desc": "Total -- Miscellaneous Receipts", "current_fytd_net_rcpt_amt": "4134839053.95", "data_type_cd": "T", "sequence_level_nbr": "2"}, {"parent_id": "null", "classification_id": "59758593", "classification_desc": "Total -- Receipts", "current_fytd_net_rcpt_amt": "368940118602.77", "data_type_cd": "T", "sequence_level_nbr": "1"}, {"parent_id": "59758593", "classification_id": "59758599", "classification_desc": "Total -- On-Budget", "current_fytd_net_rcpt_amt": "273965118602.77", "data_type_cd": "T", "sequence_level_nbr": "2"}, {"parent_id": "59758593", "classification_id": "59758604", "classification_desc": "Total -- Off-Budget", "current_fytd_net_rcpt_amt": "94975000000.00", "data_type_cd": "T", "sequence_level_nbr": "2"}]
+[
+  {
+    "parent_id": "null",
+    "classification_id": "59758421",
+    "classification_desc": "Individual Income Taxes",
+    "current_fytd_net_rcpt_amt": "null",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "1"
+  },
+  {
+    "parent_id": "59758421",
+    "classification_id": "59758422",
+    "classification_desc": "Withheld",
+    "current_fytd_net_rcpt_amt": "null",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "59758421",
+    "classification_id": "59758426",
+    "classification_desc": "Presidential Election Campaign Fund",
+    "current_fytd_net_rcpt_amt": "null",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "59758421",
+    "classification_id": "59758427",
+    "classification_desc": "Other",
+    "current_fytd_net_rcpt_amt": "null",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "59758421",
+    "classification_id": "59758429",
+    "classification_desc": "Total -- Individual Income Taxes",
+    "current_fytd_net_rcpt_amt": "186376346288.16",
+    "data_type_cd": "T",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "null",
+    "classification_id": "59758430",
+    "classification_desc": "Corporation Income Taxes",
+    "current_fytd_net_rcpt_amt": "18042284142.96",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "1"
+  },
+  {
+    "parent_id": "null",
+    "classification_id": "59758434",
+    "classification_desc": "Social Insurance and Retirement Receipts:",
+    "current_fytd_net_rcpt_amt": "null",
+    "data_type_cd": "S",
+    "sequence_level_nbr": "1"
+  },
+  {
+    "parent_id": "59758434",
+    "classification_id": "59758436",
+    "classification_desc": "Employment and General Retirement:",
+    "current_fytd_net_rcpt_amt": "null",
+    "data_type_cd": "S",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "59758436",
+    "classification_id": "59758439",
+    "classification_desc": "Federal Old-Age and Survivors Insurance Trust Fund:",
+    "current_fytd_net_rcpt_amt": "null",
+    "data_type_cd": "S",
+    "sequence_level_nbr": "3"
+  },
+  {
+    "parent_id": "59758439",
+    "classification_id": "59758440",
+    "classification_desc": "Federal Insurance Contributions Act Taxes",
+    "current_fytd_net_rcpt_amt": "80826000000.00",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "4"
+  },
+  {
+    "parent_id": "59758439",
+    "classification_id": "59758444",
+    "classification_desc": "Self-Employment Contributions Act Taxes",
+    "current_fytd_net_rcpt_amt": "362000000.00",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "4"
+  },
+  {
+    "parent_id": "59758439",
+    "classification_id": "59758457",
+    "classification_desc": "Total -- Federal Old-Age and Survivors Insurance Trust Fund",
+    "current_fytd_net_rcpt_amt": "81188000000.00",
+    "data_type_cd": "T",
+    "sequence_level_nbr": "4"
+  },
+  {
+    "parent_id": "59758436",
+    "classification_id": "59758461",
+    "classification_desc": "Federal Disability Insurance Trust Fund:",
+    "current_fytd_net_rcpt_amt": "null",
+    "data_type_cd": "S",
+    "sequence_level_nbr": "3"
+  },
+  {
+    "parent_id": "59758461",
+    "classification_id": "59758465",
+    "classification_desc": "Federal Insurance Contributions Act Taxes",
+    "current_fytd_net_rcpt_amt": "13726000000.00",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "4"
+  },
+  {
+    "parent_id": "59758461",
+    "classification_id": "59758470",
+    "classification_desc": "Self-Employment Contributions Act Taxes",
+    "current_fytd_net_rcpt_amt": "61000000.00",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "4"
+  },
+  {
+    "parent_id": "59758461",
+    "classification_id": "59758484",
+    "classification_desc": "Total -- Federal Disability Insurance Trust Fund",
+    "current_fytd_net_rcpt_amt": "13787000000.00",
+    "data_type_cd": "T",
+    "sequence_level_nbr": "4"
+  },
+  {
+    "parent_id": "59758436",
+    "classification_id": "59758488",
+    "classification_desc": "Federal Hospital Insurance Trust Fund:",
+    "current_fytd_net_rcpt_amt": "null",
+    "data_type_cd": "S",
+    "sequence_level_nbr": "3"
+  },
+  {
+    "parent_id": "59758488",
+    "classification_id": "59758493",
+    "classification_desc": "Federal Insurance Contributions Act Taxes",
+    "current_fytd_net_rcpt_amt": "32876000000.00",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "4"
+  },
+  {
+    "parent_id": "59758488",
+    "classification_id": "59758494",
+    "classification_desc": "Self-Employment Contributions Act Taxes",
+    "current_fytd_net_rcpt_amt": "184000000.00",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "4"
+  },
+  {
+    "parent_id": "59758488",
+    "classification_id": "59758510",
+    "classification_desc": "Total -- Federal Hospital Insurance Trust Fund",
+    "current_fytd_net_rcpt_amt": "33060000000.00",
+    "data_type_cd": "T",
+    "sequence_level_nbr": "4"
+  },
+  {
+    "parent_id": "59758436",
+    "classification_id": "59758513",
+    "classification_desc": "Railroad Retirement:",
+    "current_fytd_net_rcpt_amt": "null",
+    "data_type_cd": "S",
+    "sequence_level_nbr": "3"
+  },
+  {
+    "parent_id": "59758513",
+    "classification_id": "59758516",
+    "classification_desc": "Rail Pension and Supplemental Annuity",
+    "current_fytd_net_rcpt_amt": "286778372.19",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "4"
+  },
+  {
+    "parent_id": "59758513",
+    "classification_id": "59758519",
+    "classification_desc": "Social Security Equivalent Account",
+    "current_fytd_net_rcpt_amt": "304569666.28",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "4"
+  },
+  {
+    "parent_id": "59758436",
+    "classification_id": "59758522",
+    "classification_desc": "Total -- Employment and General Retirement",
+    "current_fytd_net_rcpt_amt": "128626348038.47",
+    "data_type_cd": "T",
+    "sequence_level_nbr": "3"
+  },
+  {
+    "parent_id": "59758434",
+    "classification_id": "59758525",
+    "classification_desc": "Unemployment Insurance:",
+    "current_fytd_net_rcpt_amt": "null",
+    "data_type_cd": "S",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "59758525",
+    "classification_id": "59758527",
+    "classification_desc": "Deposits by States",
+    "current_fytd_net_rcpt_amt": "1986800637.11",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "3"
+  },
+  {
+    "parent_id": "59758525",
+    "classification_id": "59758530",
+    "classification_desc": "Federal Unemployment Taxes",
+    "current_fytd_net_rcpt_amt": "157378436.66",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "3"
+  },
+  {
+    "parent_id": "59758525",
+    "classification_id": "59758533",
+    "classification_desc": "Railroad Unemployment Taxes",
+    "current_fytd_net_rcpt_amt": "6166514.16",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "3"
+  },
+  {
+    "parent_id": "59758525",
+    "classification_id": "59758539",
+    "classification_desc": "Total -- Unemployment Insurance",
+    "current_fytd_net_rcpt_amt": "2150345587.93",
+    "data_type_cd": "T",
+    "sequence_level_nbr": "3"
+  },
+  {
+    "parent_id": "59758434",
+    "classification_id": "59758542",
+    "classification_desc": "Other Retirement:",
+    "current_fytd_net_rcpt_amt": "null",
+    "data_type_cd": "S",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "59758542",
+    "classification_id": "59758545",
+    "classification_desc": "Federal Employees' Retirement--Employee Share",
+    "current_fytd_net_rcpt_amt": "694838009.58",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "3"
+  },
+  {
+    "parent_id": "59758542",
+    "classification_id": "59758548",
+    "classification_desc": "Non-Federal Employees Retirement",
+    "current_fytd_net_rcpt_amt": "2601813.51",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "3"
+  },
+  {
+    "parent_id": "59758542",
+    "classification_id": "59758551",
+    "classification_desc": "Total -- Other Retirement",
+    "current_fytd_net_rcpt_amt": "697439823.09",
+    "data_type_cd": "T",
+    "sequence_level_nbr": "3"
+  },
+  {
+    "parent_id": "59758434",
+    "classification_id": "59758554",
+    "classification_desc": "Total -- Social Insurance and Retirement Receipts",
+    "current_fytd_net_rcpt_amt": "131474133449.49",
+    "data_type_cd": "T",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "null",
+    "classification_id": "59758557",
+    "classification_desc": "Excise Taxes:",
+    "current_fytd_net_rcpt_amt": "null",
+    "data_type_cd": "S",
+    "sequence_level_nbr": "1"
+  },
+  {
+    "parent_id": "59758557",
+    "classification_id": "59758561",
+    "classification_desc": "Miscellaneous Excise Taxes",
+    "current_fytd_net_rcpt_amt": "4302598914.87",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "59758557",
+    "classification_id": "59758564",
+    "classification_desc": "Airport and Airway Trust Fund",
+    "current_fytd_net_rcpt_amt": "648170000.00",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "59758557",
+    "classification_id": "59758567",
+    "classification_desc": "Highway Trust Fund",
+    "current_fytd_net_rcpt_amt": "973525140.34",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "59758557",
+    "classification_id": "59758570",
+    "classification_desc": "Black Lung Disability Trust Fund",
+    "current_fytd_net_rcpt_amt": "5201000.00",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "59758557",
+    "classification_id": "59758573",
+    "classification_desc": "Total -- Excise Taxes",
+    "current_fytd_net_rcpt_amt": "5929495055.21",
+    "data_type_cd": "T",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "null",
+    "classification_id": "59758576",
+    "classification_desc": "Estate and Gift Taxes",
+    "current_fytd_net_rcpt_amt": "3765792152.82",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "1"
+  },
+  {
+    "parent_id": "null",
+    "classification_id": "59758578",
+    "classification_desc": "Customs Duties",
+    "current_fytd_net_rcpt_amt": "19217228460.18",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "1"
+  },
+  {
+    "parent_id": "null",
+    "classification_id": "59758580",
+    "classification_desc": "Miscellaneous Receipts:",
+    "current_fytd_net_rcpt_amt": "null",
+    "data_type_cd": "S",
+    "sequence_level_nbr": "1"
+  },
+  {
+    "parent_id": "59758580",
+    "classification_id": "59758583",
+    "classification_desc": "Deposit of Earnings, Federal Reserve System",
+    "current_fytd_net_rcpt_amt": "989489867.11",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "59758580",
+    "classification_id": "59758585",
+    "classification_desc": "Universal Service Fund",
+    "current_fytd_net_rcpt_amt": "622480786.67",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "59758580",
+    "classification_id": "59758588",
+    "classification_desc": "All Other",
+    "current_fytd_net_rcpt_amt": "2522868400.17",
+    "data_type_cd": "D",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "59758580",
+    "classification_id": "59758590",
+    "classification_desc": "Total -- Miscellaneous Receipts",
+    "current_fytd_net_rcpt_amt": "4134839053.95",
+    "data_type_cd": "T",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "null",
+    "classification_id": "59758593",
+    "classification_desc": "Total -- Receipts",
+    "current_fytd_net_rcpt_amt": "368940118602.77",
+    "data_type_cd": "T",
+    "sequence_level_nbr": "1"
+  },
+  {
+    "parent_id": "59758593",
+    "classification_id": "59758599",
+    "classification_desc": "Total -- On-Budget",
+    "current_fytd_net_rcpt_amt": "273965118602.77",
+    "data_type_cd": "T",
+    "sequence_level_nbr": "2"
+  },
+  {
+    "parent_id": "59758593",
+    "classification_id": "59758604",
+    "classification_desc": "Total -- Off-Budget",
+    "current_fytd_net_rcpt_amt": "94975000000.00",
+    "data_type_cd": "T",
+    "sequence_level_nbr": "2"
+  }
+]
