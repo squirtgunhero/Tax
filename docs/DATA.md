@@ -1,5 +1,7 @@
 # Sources and accounting methodology
 
+This initial methodology is supplemented by PHASE2.md and VERIFICATION-PHASE2.md for current NJ feeds, official legislative bulk ingestion, fiscal-document extraction, district lookup, estimation, and storage.
+
 ## Federal receipts and spending
 
 Source: Treasury Fiscal Data, Monthly Treasury Statement (MTS), endpoints `v1/accounting/mts/mts_table_2`, `_4`, and `_5` under `https://api.fiscaldata.treasury.gov/services/api/fiscal_service/`.

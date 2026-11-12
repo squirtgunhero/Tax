@@ -1,0 +1,58 @@
+{
+  "startedAt": "2026-11-12T22:39:55.468Z",
+  "completedAt": "2026-11-12T22:40:00.991Z",
+  "ok": true,
+  "storage": "filesystem",
+  "results": [
+    {
+      "id": "treasury-debt",
+      "ok": true,
+      "durationMs": 16
+    },
+    {
+      "id": "federal-fiscal",
+      "ok": true,
+      "durationMs": 17
+    },
+    {
+      "id": "nj-complete-expenditure",
+      "ok": true,
+      "durationMs": 69
+    },
+    {
+      "id": "nj-complete-revenue",
+      "ok": true,
+      "durationMs": 16
+    },
+    {
+      "id": "nj-current-expenditure",
+      "ok": true,
+      "durationMs": 2
+    },
+    {
+      "id": "nj-current-revenue",
+      "ok": true,
+      "durationMs": 1
+    },
+    {
+      "id": "nj-procurement",
+      "ok": true,
+      "durationMs": 5432
+    },
+    {
+      "id": "nj-legislation",
+      "ok": true,
+      "durationMs": 1189
+    },
+    {
+      "id": "federal-discovery",
+      "ok": true,
+      "durationMs": 3
+    },
+    {
+      "id": "nj-publications",
+      "ok": true,
+      "durationMs": 1
+    }
+  ]
+}

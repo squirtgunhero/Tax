@@ -8,8 +8,25 @@ const row = z.object({
   department_agency_desc: z.string(),
   commodity_sector_desc: z.string(),
   vendor_name: z.string(),
-  ytd_amt: amount,
+  ytd_amt: amount.nullish(),
 });
+export function normalizePurchase(value: unknown) {
+  const parsed = row.safeParse(value);
+  if (!parsed.success)
+    throw new DataError(
+      "SCHEMA_CHANGED",
+      "Official purchasing record is invalid.",
+    );
+  const r = parsed.data;
+  return {
+    agency: r.department_agency_desc,
+    category: r.commodity_sector_desc,
+    vendor: r.vendor_name,
+    amount: r.ytd_amt ?? null,
+    fiscalYear: r.fiscal_year,
+    throughDate: r.fy_through_date,
+  };
+}
 const sql = (value: string) => `'${value.replaceAll("'", "''")}'`;
 export async function getProcurement(params: URLSearchParams) {
   const p = z
@@ -21,7 +38,7 @@ export async function getProcurement(params: URLSearchParams) {
       year: z.coerce.number().int().min(2000).max(2100).optional(),
     })
     .parse(Object.fromEntries(params));
-  return cached(`procurement:v2:${JSON.stringify(p)}`, 900000, async () => {
+  return cached(`procurement:v3:${JSON.stringify(p)}`, 900000, async () => {
     const periods = await json(
       `${endpoint}?${new URLSearchParams({ $select: "fiscal_year", $group: "fiscal_year", $order: "fiscal_year DESC", $limit: "100" })}`,
       z.array(z.object({ fiscal_year: z.string().regex(/^[0-9]{4}$/) })).min(1),
@@ -47,7 +64,7 @@ export async function getProcurement(params: URLSearchParams) {
       $limit: "21",
       $offset: String((p.page - 1) * 20),
       $order:
-        "ytd_amt DESC,department_agency_desc,commodity_sector_desc,vendor_name",
+        "ytd_amt DESC NULLS LAST,department_agency_desc,commodity_sector_desc,vendor_name",
       ...(where ? { $where: where } : {}),
     });
     const [rows, meta] = await Promise.all([
@@ -67,14 +84,7 @@ export async function getProcurement(params: URLSearchParams) {
       years: periods.map((r) => Number(r.fiscal_year)),
       page: p.page,
       hasNext: rows.length > 20,
-      results: rows.slice(0, 20).map((r) => ({
-        agency: r.department_agency_desc,
-        category: r.commodity_sector_desc,
-        vendor: r.vendor_name,
-        amount: r.ytd_amt,
-        fiscalYear: r.fiscal_year,
-        throughDate: r.fy_through_date,
-      })),
+      results: rows.slice(0, 20).map(normalizePurchase),
       source: metadata(
         "NJ Division of Purchase and Property · " + meta.name,
         "https://data.nj.gov/d/ubnu-tqu7",
@@ -88,7 +98,7 @@ export async function getProcurement(params: URLSearchParams) {
         },
       ),
       disclaimer:
-        "Purchasing includes amounts paid, obligations to vendors, and amounts set aside for imminent purchases. This is not a payment-only feed or an individual contract register. Do not sum with NJ expenditures or federal awards. Authority purchasing is excluded by the publisher.",
+        "Purchasing includes amounts paid, obligations to vendors, and amounts set aside for imminent purchases. This is not a payment-only feed or an individual contract register. Do not sum with NJ expenditures or federal awards. Authority purchasing is excluded by the publisher. Missing source amounts remain unknown, not zero.",
     };
   });
 }

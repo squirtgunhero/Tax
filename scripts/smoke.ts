@@ -7,6 +7,7 @@ const cases: [string, number][] = [
   ["/api/federal/discovery?type=s", 200],
   ["/api/nj/current", 200],
   ["/api/nj/current?kind=revenue", 200],
+  ["/api/nj/procurement", 200],
   ["/api/nj/procurement?q=GRAINGER", 200],
   ["/api/nj/procurement?q=GRAINGER&year=2025", 200],
   ["/api/nj/bills?q=appropriation", 200],

@@ -1,0 +1,12 @@
+{
+  "at": "2026-11-12T22:38:41.141Z",
+  "base": "http://localhost:3000",
+  "path": "/api/treasury/debt",
+  "requests": 25,
+  "concurrency": 5,
+  "errors": 0,
+  "totalMs": 284,
+  "p50Ms": 38,
+  "p95Ms": 95,
+  "scope": "Small warmed-cache smoke load, not a capacity benchmark or upstream stress test."
+}

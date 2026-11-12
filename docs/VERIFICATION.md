@@ -1,4 +1,6 @@
-# Verification report — 2026-11-12
+# Initial verification report — 2026-11-12
+
+This report is retained as the initial-release record. See VERIFICATION-PHASE2.md for the subsequent implementation and current limitations.
 
 All results below were obtained in this environment, against the production build served by `next start` on port 3000. They do not establish deployment health or future upstream availability. The source inventory itself is a capability list, not a health probe.
 

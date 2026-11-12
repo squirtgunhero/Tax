@@ -203,3 +203,17 @@ test("official IRS fixture has the verified source checksum", () => {
     "e9ada115fb43a4af5ea326ca91edd40ab0bf29b9be01d2c13d7b8fa96214635b",
   );
 });
+
+test("purchasing records retain missing official amounts as unknown rather than zero", async () => {
+  const { normalizePurchase } = await import("../lib/data/procurement");
+  const row = {
+    fiscal_year: "2026",
+    fy_through_date: "30-Jun-26",
+    department_agency_desc: "CORRECTIONS",
+    commodity_sector_desc: "Radio Communication",
+    vendor_name: "MO",
+  };
+  assert.equal(normalizePurchase(row).amount, null);
+  assert.equal(normalizePurchase({ ...row, ytd_amt: "0" }).amount, "0");
+  assert.throws(() => normalizePurchase({ ...row, ytd_amt: "unreported" }));
+});

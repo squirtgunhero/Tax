@@ -220,6 +220,7 @@ export async function locateRepresentatives(input: unknown) {
       tiger,
       "district-boundary",
       layer.name,
+      { cacheTtlSeconds: 0 },
     ),
     directorySources: [houseURL, senateURL],
     disclaimer:

@@ -15,9 +15,8 @@ export async function GET() {
   }
   const report = lastRun as { ok?: boolean; completedAt?: string } | null;
   const stale =
-    !!process.env.CRON_SECRET &&
-    (!report?.completedAt ||
-      Date.now() - Date.parse(report.completedAt) > 26 * 3600000);
+    !report?.completedAt ||
+    Date.now() - Date.parse(report.completedAt) > 26 * 3600000;
   const ok =
     storageReadable && mode !== "memory-only" && !stale && report?.ok === true;
   return NextResponse.json(

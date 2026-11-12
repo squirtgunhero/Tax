@@ -1,89 +1,90 @@
 # Public Ledger
 
-Explore official federal and New Jersey finances and legislative decisions without registering or supplying personal financial information. Built on the existing Next.js App Router, React, and TypeScript starter.
+A public finance explorer built on the existing Next.js App Router, React, and TypeScript starter. Explore without an account or personal financial records.
 
 ## Run
 
-Use Node 24 (minimum 22.19) and npm. The lockfile is committed.
+Use Node 24 (minimum 22.19):
 
 ```bash
 npm ci
 npm run dev
-# http://localhost:3000
 ```
 
-For a production server, stop the development server before building; both use `.next`.
+For production, stop development before building because both use `.next`:
 
 ```bash
 npm run build
 npm start
 ```
 
-`CONGRESS_API_KEY` is optional and server-side only. Copy `.env.example` to `.env.local` to enable Congress.gov's latest-bill API. Exact bill lookup uses the official Library of Congress bill-status XML hosted by GovInfo and needs no key. Never prefix secrets with `NEXT_PUBLIC_`.
+Copy `.env.example` to `.env.local` for optional server settings. Next.js loads that file; standalone CLI scripts require variables in the shell or Node's `--env-file`. Never use NEXT_PUBLIC prefixes for secrets.
 
-Hosts requiring an outbound proxy can set `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY`. The shared HTTP client honors these variables. Retain your host's trusted CA configuration; do not disable TLS verification.
+## What is connected
 
-## Expanded integration coverage
+| Area                   | Available data                                                                                                                                                                                                 |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Federal finances       | Treasury actual receipts, outlays, deficit/surplus, category breakdowns that reconcile to totals, historical fiscal-year selection, and separately labeled debt                                                |
+| Federal awards         | USAspending contracts, grants, direct payments, other assistance, and loans; agency, recipient, keyword, fiscal activity year, NJ performance-location filters, and pagination                                 |
+| Federal decisions      | Keyless GovInfo bill discovery, bill text references, actions, sponsors, official CBO summaries/workbook tables, and House/Senate individual votes                                                             |
+| NJ current finances    | OMB current revenue and separately reported expended/obligated amounts; FY 2027 through September 30, 2026 observed in verification                                                                            |
+| NJ historical finances | OMB complete-year agency revenue/expenditure summaries for 2003–2025, with filters and exact totals                                                                                                            |
+| NJ legislation         | Official bulk CSV bill database, canonical identifiers, amended/reprint display numbers, synopses, official status definitions, actions, sponsors, original/fiscal documents, and annual chamber vote archives |
+| NJ purchasing          | Vendor/agency/commodity/year searches; includes paid, obligated, and reserved amounts, clearly distinguished from expenditures and individual contract records                                                 |
+| Source documents       | OMB publication discovery and approved official PDF page extraction, page citations and SHA-256 checksums; CBO workbook cached values with original units/labels and no formula execution                      |
+| Optional context       | Consent-based Census district matching plus official federal/NJ member directories; browser-only 2026 ordinary-income tax illustration for single/joint filers                                                 |
 
-See [the follow-up implementation and operational notes](docs/PHASE2.md). The app now includes keyless federal discovery, NJ bulk bills and votes, current NJ expended/obligated records, vendor purchasing, official fiscal-document readers, consent-based district lookup, and a browser-only 2026 tax illustration.
+`CONGRESS_API_KEY` is optional for the separate Congress.gov latest-bill API. The keyless GovInfo discovery and exact lookup work without it. Credentialed Congress.gov behavior is not verified without a real key.
 
-## Available data
+Every successful financial response carries source, measure, period, retrieval time, and cache duration. Missing source amounts remain unknown, not zero. Awards are cumulative obligations for awards with activity in the selected year; they are not payments in that year. Loan face value and subsidy cost are separate. Official estimates, appropriations, obligations, expenditures, receipts, purchasing, and debt remain different measures.
 
-- **Treasury:** actual fiscal-year-to-date receipts, outlays, deficit/surplus, revenue-source and department/group breakdowns, historical fiscal-year selection, and a separately labeled daily debt balance. Category sums must reconcile with official totals before being returned.
-- **USAspending:** searchable contract, grant, direct-payment, insurance/other-assistance, and loan awards. Filter by fiscal activity year, agency, recipient, keyword, and NJ place of performance. Paginated award-level obligations are cumulative, not payments in the selected year. Loan face values and subsidy costs have separate treatment.
-- **New Jersey:** OMB agency expenditure and revenue summaries, complete fiscal years 2003–2025 as observed during verification, with agency/category/program filtering, exact filtered totals, and source-labeled federal-funding subtotals. These exclude the separate authority datasets. OMB classification definitions reference expenditures or obligations; cash-payment equivalence has not been independently verified.
-- **Decisions:** exact federal bill lookup, current status, action history, sponsors, available original introduced text, all-version links, and version-specific CBO estimate references. On-demand House and Senate roll calls include individual votes, state filters, reconciled totals, and separate vice-presidential tie-breaks.
-- **NJ publications:** a live index of official OMB budget, appropriation, and financial-report PDFs. Figures inside PDFs are not extracted. Official NJ bill, vote, representative, and procurement links are provided while those structured integrations remain incomplete.
+## Storage, ingestion, and health
 
-Each successful upstream-backed response includes source attribution, reporting period, retrieval time, and cache duration. NJ summaries also expose the publisher's update date. No sample figures or fallback financial records are served.
+- Without explicit configuration: bounded process-local 15-minute cache; no durability claim.
+- Persistent Node host: set `LEDGER_DATA_DIR` to a durable absolute directory. Vercel's ephemeral filesystem is deliberately not used as durable storage.
+- Vercel: connect a **private Blob store** with `BLOB_READ_WRITE_TOKEN`. Checksummed immutable snapshot versions and current shared-cache pointers are stored privately. Original retrieval times are preserved, and reading a shared entry does not extend its TTL.
+- Set `CRON_SECRET` to protect `/api/internal/ingest`. Vercel's daily schedule is in `vercel.json`; schedules run on production deployments, so previews require an authenticated manual invocation.
+- `npm run ingest` warms ten source adapters and saves a durable run report. `/api/health` reflects the last run, its freshness, storage readability, and process metrics; it returns 503 if degraded. Logs omit query strings, bodies, addresses, and credentials.
+
+```bash
+LEDGER_DATA_DIR=/absolute/persistent/path npm run ingest
+LEDGER_DATA_DIR=/absolute/persistent/path npm start
+```
+
+See [expanded methodology and operations](docs/PHASE2.md). The persistent filesystem backend and protected ingestion/health paths are verified. Managed Blob and Vercel runtime verification remain blocked by account permissions described in the current verification report.
 
 ## Verify
 
 ```bash
-npm test                 # deterministic adapter, accounting, retry, and cache tests
+npm test
 npm run typecheck
 npm run build
 npm audit --omit=dev
-npm start                # separate terminal; defaults to port 3000
-npm run test:live         # calls the running application's actual API routes
+# Start the production app in another terminal, then:
+npm run test:live
 npx playwright install chromium
-npm run test:e2e          # browser journeys, mobile/error states, accessibility scan
+npm run test:e2e
+npm run test:load
 ```
 
-Set `SMOKE_BASE_URL` for another port or a deployed instance. In this sandbox, npm and Playwright need writable workspace caches:
+`SMOKE_BASE_URL` selects another running instance. When the server has configured secrets, provide the same environment to smoke tests so expected configuration responses match. Tests never require secret values in source files. In the managed sandbox, use `--cache /workspace/.npm-cache` for npm and `PLAYWRIGHT_BROWSERS_PATH=/workspace/.playwright` for browser installation/execution.
 
-```bash
-npm ci --cache /workspace/.npm-cache
-PLAYWRIGHT_BROWSERS_PATH=/workspace/.playwright npx playwright install chromium
-SMOKE_BASE_URL=http://localhost:3001 PLAYWRIGHT_BROWSERS_PATH=/workspace/.playwright npm run test:e2e
-```
-
-CI runs deterministic tests, TypeScript, production build, and production dependency audit. Live government-service checks are a separate command because remote availability and credentials change independently of code.
-
-See [the initial audit](docs/AUDIT.md), [verification evidence](docs/VERIFICATION.md), [machine-readable live results](docs/live-smoke.json), and [source methodology](docs/DATA.md).
-
-## Architecture
-
-`lib/data/` contains independent server adapters and shared HTTP, validation, and monetary functions. `app/api/` exposes normalized JSON; `app/components/` renders the explorer. Monetary aggregation uses integer cents and returns decimal strings. Upstream JSON numeric award amounts are normalized from the precision supplied by USAspending; they are never used for jurisdiction-wide totals. Displayed figures are rounded and labeled.
-
-The HTTP layer has per-attempt timeouts, bounded retries for transient errors, Retry-After handling, response-size limits, request coalescing, and a bounded 15-minute process-local cache. Errors are not cached or replaced with successful empty data. No stale-on-error records are served. `status: live` means a successful official-source retrieval, which may be cached; use `retrievedAt` rather than treating that status as a real-time guarantee. Source inventory is explicitly not a health check.
-
-Read-through ingestion now supports private Vercel Blob snapshots/shared caching and a protected daily ingestion job; see PHASE2.md. Without explicit storage configuration, the application reports memory-only operation. A durable filesystem backend is available on persistent Node hosts, never as a durability claim for Vercel /tmp. PostgreSQL/Prisma would be appropriate for durable snapshots, change history, reconciliation, saved views, or scheduled imports; none is needed to pretend the current explorer has persistence. Cache state is independent per server process and disappears on restart.
+CI runs deterministic tests, TypeScript, production build, and the production dependency audit. Live government checks are separate from CI because availability changes independently of source code. The load test is only a bounded 25-request / five-concurrent warmed-cache smoke check, not a production capacity claim.
 
 ## Deploy
 
-Use Vercel's Next.js preset or a Node 24 host:
+Use a Node 24 host or Vercel's Next.js preset. Install with `npm ci`, build with `npm run build`, and use `npm start` on a Node host behind HTTPS. Configure storage and ingestion secrets server-side as described above. Data functions request 120 seconds; ingestion requests 300 seconds. Ensure the hosting plan supports those limits.
 
-1. Import this repository and install with `npm ci`.
-2. Build with `npm run build`; a Node host starts with `npm start` behind its HTTPS reverse proxy.
-3. Optionally configure `CONGRESS_API_KEY` as a server-only secret.
-4. Permit outbound HTTPS to `api.usaspending.gov`, `api.fiscaldata.treasury.gov`, `data.nj.gov`, `www.nj.gov`, `www.govinfo.gov`, `clerk.house.gov`, `www.senate.gov`, and optionally `api.congress.gov`.
-5. API routes request a 120-second function ceiling. Ensure the hosting plan supports it or lower adapter budgets and use a shared ingestion/cache service. Verify the deployed instance with `SMOKE_BASE_URL=https://your-host npm run test:live`.
+Outbound HTTPS is needed for USAspending, Treasury Fiscal Data, data.nj.gov, www.nj.gov, pub.njleg.gov, www.njleg.state.nj.us, GovInfo, CBO, IRS, Census geocoding/TIGERweb, House Clerk, Senate, and optionally api.congress.gov. Vercel Blob additionally needs its service endpoints. Government HTTP adapters honor HTTPS_PROXY/HTTP_PROXY/NO_PROXY; retain trusted proxy CAs and never disable TLS verification.
 
-No database, migration, or user credential is required. Hosting/deployment itself has not been performed here. Before scaling public traffic, introduce a shared cache and edge rate controls rather than multiplying upstream requests across workers.
+Before promotion, run live routes, browser flows, authenticated ingestion, health, and load checks against the deployed preview. No public Vercel deployment or managed-store success is claimed: project creation returned HTTP 403 for the connected team, with no authenticated CLI fallback available.
 
 ## Boundaries
 
-Federal and state records are not combined into a grand total: federal transfers can appear on both sides. Federal FY starts October 1; NJ FY starts July 1. Budgets, appropriations, obligations, awards, actual expenditures, debt, and forecasts are different measures.
+Federal and state totals are not combined. Transfers can appear on both sides, fiscal calendars differ, and the selected sources do not provide a verified shared cash-transfer reconciliation. Federal FY starts October 1; NJ FY starts July 1. Agency summaries, current records, and purchasing feeds overlap in scope and must not be added together.
 
-Credentialed Congress.gov discovery remains unverified with a real key, but keyless GovInfo discovery works. The added NJ legislation/votes, current finances, purchasing, document extraction, district lookup, tax illustration, storage, and ingestion/health features are detailed in PHASE2.md. Independent bank-settlement verification, statewide audited reconciliation, unified contract-level procurement, and federal/state transfer consolidation remain outside the verified data scope. An official estimate link is not a normalized fiscal-impact calculation. A missing source field is not zero, and a missing roll-call reference is not evidence that no vote occurred.
+Government-reported amounts are not independent bank-settlement audits or an automatically reconciled statewide financial statement. Authority purchasing is unavailable in the selected feed. NJ annual vote archives can have ambiguous groups and session-boundary coverage gaps; source codes remain explicit. PDF extraction can change reading order, and large/unusual documents can exceed limits. Different estimate versions/baselines are never summed.
+
+Addresses require consent to send to Census and are not saved by Public Ledger. Census has its own logging policies. Income stays in the browser. The 2026 tax model excludes credits, other deductions, payroll/state/self-employment taxes, capital gains, AMT, and other special provisions; it cannot trace an individual's taxes to purchases. No SSNs, tax credentials, or sensitive financial uploads are collected.
+
+See the [initial audit](docs/AUDIT.md), [initial verification](docs/VERIFICATION.md), [follow-up verification](docs/VERIFICATION-PHASE2.md), [data methodology](docs/DATA.md), and [current source checks](docs/live-smoke.json).
