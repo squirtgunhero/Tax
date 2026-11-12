@@ -8,6 +8,9 @@ import {
   type Bill,
   type Publications,
 } from "./common";
+import { EstimateReader, PDFReader } from "./documents";
+import { FederalDiscovery } from "./discovery";
+import { NJDecisions } from "./nj-decisions";
 import type { getVote } from "@/lib/data/votes";
 function VoteDetail({ vote }: { vote: Bill["bill"]["votes"][number] }) {
   const [open, setOpen] = useState(false),
@@ -158,6 +161,16 @@ export function DecisionsView() {
         </label>
         <button className="primary">Look up official bill ↗</button>
       </form>
+      <FederalDiscovery
+        onSelect={(type, number, congress) => {
+          setType(type);
+          setNumber(number);
+          setCongress(congress);
+          setLookup(
+            `/api/federal/bill?${new URLSearchParams({ type, number, congress })}`,
+          );
+        }}
+      />
       <Feedback {...r} />
       {r.data && (
         <article className="bill">
@@ -200,6 +213,7 @@ export function DecisionsView() {
                   <small>
                     {date(e.pubDate)} · {e.description}
                   </small>
+                  <EstimateReader url={e.url} />
                 </li>
               ))}
             </ul>
@@ -243,11 +257,11 @@ export function DecisionsView() {
         </article>
       )}
       <section className="editorial-section">
-        <h2>New Jersey decisions</h2>
+        <NJDecisions />
         <p>
           Use the Legislature’s official records for bill histories, fiscal
-          notes, and votes. Structured NJ legislative and procurement ingestion
-          is not connected yet.
+          notes, and votes. Structured bill, action, sponsor, and vote records
+          are read from the Legislature’s official bulk downloads.
         </p>
         <div className="official-links">
           <a href="https://www.njleg.state.nj.us/bill-search">
@@ -268,8 +282,10 @@ export function DecisionsView() {
         {docs.data && (
           <>
             <p className="caption">
-              Live index from OMB. Document figures have not been extracted.
-              Appropriations authorize spending; they are not expenditures.
+              Live index from OMB. Read selected source pages with citations and
+              document checksums below. Extracted text preserves source wording;
+              it is not a consolidated financial statement. Appropriations
+              authorize spending; they are not expenditures.
             </p>
             <ul className="document-list">
               {docs.data.documents.map((d) => (
@@ -278,6 +294,7 @@ export function DecisionsView() {
                   <small>
                     {d.collection} · {d.kind.replaceAll("-", " ")}
                   </small>
+                  <PDFReader url={d.url} />
                 </li>
               ))}
             </ul>
@@ -291,7 +308,8 @@ export function DecisionsView() {
           Bill sponsors and roll-call records above identify participants in
           legislative decisions. Award records identify awarding agencies. To
           find your elected representatives, use an official address-based
-          lookup; a ZIP code alone can cross districts.
+          lookup; a ZIP code alone can cross districts. Optional address-based
+          matching is available under Your context.
         </p>
         <div className="official-links">
           <a href="https://www.house.gov/representatives/find-your-representative">

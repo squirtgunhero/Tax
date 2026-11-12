@@ -1,4 +1,5 @@
 "use client";
+import { NJCurrentView, ProcurementView } from "./nj-records";
 import { useState } from "react";
 import {
   useData,
@@ -9,6 +10,40 @@ import {
   type NJ,
 } from "./common";
 export function NJView() {
+  const [scope, setScope] = useState("current");
+  return (
+    <>
+      <div className="segmented" aria-label="NJ record scope">
+        <button
+          aria-pressed={scope === "current"}
+          onClick={() => setScope("current")}
+        >
+          Latest reporting period
+        </button>
+        <button
+          aria-pressed={scope === "historical"}
+          onClick={() => setScope("historical")}
+        >
+          Complete-year summaries
+        </button>
+        <button
+          aria-pressed={scope === "purchasing"}
+          onClick={() => setScope("purchasing")}
+        >
+          Vendor purchasing
+        </button>
+      </div>
+      {scope === "current" ? (
+        <NJCurrentView />
+      ) : scope === "purchasing" ? (
+        <ProcurementView />
+      ) : (
+        <NJHistoricalView />
+      )}
+    </>
+  );
+}
+function NJHistoricalView() {
   const [kind, setKind] = useState("expenditure"),
     [year, setYear] = useState(""),
     [q, setQ] = useState(""),

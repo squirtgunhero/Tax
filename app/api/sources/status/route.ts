@@ -6,6 +6,36 @@ export function GET() {
       checkedAt: new Date().toISOString(),
       sources: [
         {
+          id: "federal-bill-discovery",
+          mode: "on-request",
+          path: "/api/federal/discovery",
+          measure: "keyless official bulk bill discovery",
+          url: "https://www.govinfo.gov/bulkdata/BILLSTATUS",
+        },
+        {
+          id: "nj-current",
+          mode: "on-request",
+          path: "/api/nj/current",
+          measure:
+            "separate expended and obligated amounts; current reporting period",
+          url: "https://data.nj.gov/d/apet-rp2i",
+        },
+        {
+          id: "nj-votes",
+          mode: "on-request",
+          path: "/api/nj/votes?bill=A794&session=2026&chamber=S&year=2026",
+          measure: "member vote choices from official CSV archives",
+          url: "https://pub.njleg.gov/votes/",
+        },
+        {
+          id: "cbo-estimates",
+          mode: "on-request",
+          path: "/api/federal/estimate?publication=61461",
+          measure:
+            "official estimate summaries and workbook cells, with units and labels preserved",
+          url: "https://www.cbo.gov/",
+        },
+        {
           id: "federal-awards",
           mode: "on-request",
           path: "/api/federal/awards",
@@ -65,13 +95,18 @@ export function GET() {
         },
         {
           id: "nj-legislation",
-          mode: "official-links-only",
-          url: "https://www.njleg.state.nj.us/bill-search",
+          mode: "on-request",
+          path: "/api/nj/bills",
+          measure:
+            "official bulk bills, histories, sponsors, and document references",
+          url: "https://www.njleg.state.nj.us/downloads",
         },
         {
           id: "nj-procurement",
-          mode: "official-links-only",
-          url: "https://www.nj.gov/treasury/purchase/",
+          mode: "on-request",
+          path: "/api/nj/procurement",
+          measure: "paid, obligated, and reserved purchasing amounts",
+          url: "https://data.nj.gov/d/ubnu-tqu7",
         },
       ],
       note: "This is a capability inventory, not a live health check. On-request sources can fail. Successful responses carry retrieval and reporting dates. Cached retrieval dates are preserved. No cross-jurisdiction grand totals.",

@@ -1,4 +1,5 @@
 "use client";
+import { ContextView } from "./components/context";
 import { useState } from "react";
 import { FiscalView } from "./components/fiscal";
 import { AwardsView } from "./components/awards";
@@ -11,6 +12,7 @@ const tabs = [
   "New Jersey",
   "Decisions & votes",
   "Sources",
+  "Your context",
 ] as const;
 export default function Home() {
   const [tab, setTab] = useState<(typeof tabs)[number]>("The big picture");
@@ -110,6 +112,7 @@ export default function Home() {
           {tab === "New Jersey" && <NJView />}{" "}
           {tab === "Decisions & votes" && <DecisionsView />}{" "}
           {tab === "Sources" && <SourcesView />}
+          {tab === "Your context" && <ContextView />}
         </main>
         <footer>
           <strong>PUBLIC LEDGER</strong>

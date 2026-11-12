@@ -11,15 +11,21 @@
     "test:live": "tsx scripts/smoke.ts",
     "test:e2e": "playwright test",
     "format:check": "prettier --check app lib tests scripts *.ts *.json .github/workflows/*.yml",
-    "format": "prettier --write app lib tests scripts *.ts *.json .github/workflows/*.yml"
+    "format": "prettier --write app lib tests scripts *.ts *.json .github/workflows/*.yml",
+    "ingest": "tsx scripts/ingest.ts",
+    "test:load": "tsx scripts/load.ts"
   },
   "dependencies": {
+    "@vercel/blob": "^2.9.0",
     "cheerio": "^1.2.0",
+    "csv-parse": "^7.0.3",
     "fast-xml-parser": "^5.12.0",
+    "fflate": "^0.8.3",
     "next": "^15.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "undici": "^8.12.4",
+    "unpdf": "^2.1.0",
     "zod": "^4.6.7"
   },
   "devDependencies": {
@@ -33,7 +39,8 @@
     "typescript": "^5.7.0"
   },
   "overrides": {
-    "postcss": "^8.5.32"
+    "postcss": "^8.5.32",
+    "@vercel/cli-config": "^0.4.0"
   },
   "engines": {
     "node": ">=22.19"

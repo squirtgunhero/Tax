@@ -90,8 +90,9 @@ export function SourcesView() {
           <p>
             Public Ledger does not trace an individual’s taxes to purchases. No
             SSN, tax credentials, income, or personal financial records are
-            collected. Tax estimates and automatic district lookup are not
-            implemented.
+            collected. Optional 2026 ordinary-income estimates run locally in
+            your browser. Address matching requires consent and is sent to
+            Census without being stored by Public Ledger.
           </p>
         </section>
       </div>

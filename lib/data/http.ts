@@ -1,5 +1,7 @@
 import { fetch as upstreamFetch, EnvHttpProxyAgent } from "undici";
 import { z } from "zod";
+import { readSnapshot, saveSnapshot, storageMode } from "./storage";
+import { metric, logFailure } from "./telemetry";
 
 export class DataError extends Error {
   constructor(
@@ -25,12 +27,38 @@ export async function cached<T>(
   load: () => Promise<T>,
 ): Promise<T> {
   const hit = cache.get(key);
-  if (hit && hit.expires > Date.now()) return hit.value as T;
+  if (hit && hit.expires > Date.now()) {
+    metric("cacheHits");
+    return hit.value as T;
+  }
   if (pending.has(key)) return pending.get(key) as Promise<T>;
-  const job = load()
+  let expiresAt = Date.now() + ttl;
+  const job = (async () => {
+    if (storageMode() !== "memory-only")
+      try {
+        const stored = await readSnapshot(key);
+        if (stored && stored.expiresAt > Date.now()) {
+          expiresAt = stored.expiresAt;
+          metric("sharedHits");
+          return stored.value as T;
+        }
+      } catch {
+        metric("storageFailures");
+        logFailure("snapshot-read", "STORAGE_READ_FAILED");
+      }
+    const value = await load();
+    if (storageMode() !== "memory-only")
+      try {
+        await saveSnapshot(key, value, ttl);
+      } catch {
+        metric("storageFailures");
+        logFailure("snapshot-write", "STORAGE_WRITE_FAILED");
+      }
+    return value;
+  })()
     .then((value) => {
       if (cache.size >= 200) cache.delete(cache.keys().next().value!);
-      cache.set(key, { value, expires: Date.now() + ttl });
+      cache.set(key, { value, expires: expiresAt });
       return value;
     })
     .finally(() => pending.delete(key));
@@ -40,7 +68,7 @@ export async function cached<T>(
 export async function request(
   url: string,
   init: { method?: string; body?: string } = {},
-  asText = false,
+  asText: boolean | "bytes" = false,
   transport = upstreamFetch,
   pause = sleep,
 ): Promise<unknown> {
@@ -50,7 +78,8 @@ export async function request(
       response = await transport(url, {
         ...init,
         headers: {
-          Accept: asText ? "application/xml,text/html" : "application/json",
+          Accept:
+            asText === "bytes" ? "*/*" : asText ? "*/*" : "application/json",
           ...(init.body ? { "Content-Type": "application/json" } : {}),
         },
         dispatcher,
@@ -106,7 +135,7 @@ export async function request(
         const chunk = await reader.read();
         if (chunk.done) break;
         bytes += chunk.value.byteLength;
-        if (bytes > 8_000_000) {
+        if (bytes > (asText === "bytes" ? 32_000_000 : 8_000_000)) {
           await reader.cancel();
           throw new DataError(
             "RESPONSE_TOO_LARGE",
@@ -123,7 +152,9 @@ export async function request(
         503,
       );
     }
-    const text = Buffer.concat(chunks).toString("utf8");
+    const buffer = Buffer.concat(chunks);
+    if (asText === "bytes") return new Uint8Array(buffer);
+    const text = buffer.toString("utf8");
     if (asText) return text;
     try {
       return JSON.parse(text);

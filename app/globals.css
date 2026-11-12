@@ -726,3 +726,70 @@ footer button {
   top: 0;
   background: var(--paper);
 }
+.record-link {
+  border: 0;
+  padding: 2px 0;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  line-height: 1.65;
+  font-weight: 600;
+}
+.source-reader {
+  margin: 10px 0 20px;
+}
+.source-reader > label {
+  display: block;
+  font-size: 12px;
+  margin: 14px 0;
+}
+.source-reader input,
+.source-reader select {
+  padding: 8px;
+  background: transparent;
+  border: 1px solid var(--line);
+  max-width: 100%;
+}
+.source-reader input[type="number"] {
+  max-width: 90px;
+}
+.source-text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font:
+    12px/1.8 Arial,
+    Helvetica,
+    sans-serif;
+  max-height: 500px;
+  overflow: auto;
+  padding: 16px;
+  border: 1px solid var(--line);
+}
+.workbook {
+  max-height: 600px;
+}
+.workbook td {
+  white-space: pre-wrap;
+  min-width: 90px;
+  font-variant-numeric: tabular-nums;
+}
+.workbook td:first-of-type {
+  min-width: 250px;
+}
+.consent {
+  flex-basis: 100% !important;
+  flex-direction: row !important;
+  align-items: center;
+  line-height: 1.6;
+}
+.consent input {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.source-reader .caption {
+  overflow-wrap: anywhere;
+}
+.segmented {
+  flex-wrap: wrap;
+}

@@ -3,6 +3,29 @@ import { writeFileSync } from "node:fs";
 const base = process.env.SMOKE_BASE_URL ?? "http://localhost:3000";
 const cases: [string, number][] = [
   ["/api/sources/status", 200],
+  ["/api/federal/discovery", 200],
+  ["/api/federal/discovery?type=s", 200],
+  ["/api/nj/current", 200],
+  ["/api/nj/current?kind=revenue", 200],
+  ["/api/nj/procurement?q=GRAINGER", 200],
+  ["/api/nj/procurement?q=GRAINGER&year=2025", 200],
+  ["/api/nj/bills?q=appropriation", 200],
+  ["/api/nj/bill?session=2026&bill=A425", 200],
+  ["/api/nj/votes?session=2026&year=2026&bill=A794&chamber=S", 200],
+  ["/api/nj/votes?session=2026&year=2026&bill=A794&chamber=A", 200],
+  ["/api/federal/estimate?publication=61461", 200],
+  [
+    "/api/documents/pdf?url=https%3A%2F%2Fpub.njleg.gov%2FBills%2F2026%2FA0500%2F425_E1.PDF&page=1",
+    200,
+  ],
+  [
+    "/api/documents/pdf?url=https%3A%2F%2Fwww.irs.gov%2Fpub%2Firs-drop%2Frp-25-32.pdf&page=18",
+    200,
+  ],
+  ["/api/documents/pdf?url=http%3A%2F%2F127.0.0.1%2Fsecret.pdf", 400],
+  ["/api/nj/bill?bill=INVALID", 400],
+  ["/api/internal/ingest", process.env.CRON_SECRET ? 401 : 503],
+
   ["/api/treasury/debt", 200],
   ["/api/treasury/fiscal?year=2025", 200],
   ["/api/treasury/fiscal?year=2026", 200],

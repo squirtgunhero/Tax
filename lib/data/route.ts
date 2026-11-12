@@ -1,14 +1,21 @@
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 import { DataError } from "./http";
+import { metric, logFailure } from "./telemetry";
 export async function respond(load: () => Promise<unknown>) {
   try {
-    return NextResponse.json(await load(), {
+    const data = await load();
+    if (data instanceof Response) return data;
+    metric("success");
+    return NextResponse.json(data, {
       headers: { "Cache-Control": "no-store" },
     });
   } catch (e) {
+    metric("failures");
     const invalid = e instanceof ZodError;
     const status = invalid ? 400 : e instanceof DataError ? e.status : 500;
+    if (!invalid)
+      logFailure("api", e instanceof DataError ? e.code : "INTERNAL_ERROR");
     return NextResponse.json(
       {
         status: "unavailable",

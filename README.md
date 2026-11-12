@@ -23,6 +23,10 @@ npm start
 
 Hosts requiring an outbound proxy can set `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY`. The shared HTTP client honors these variables. Retain your host's trusted CA configuration; do not disable TLS verification.
 
+## Expanded integration coverage
+
+See [the follow-up implementation and operational notes](docs/PHASE2.md). The app now includes keyless federal discovery, NJ bulk bills and votes, current NJ expended/obligated records, vendor purchasing, official fiscal-document readers, consent-based district lookup, and a browser-only 2026 tax illustration.
+
 ## Available data
 
 - **Treasury:** actual fiscal-year-to-date receipts, outlays, deficit/surplus, revenue-source and department/group breakdowns, historical fiscal-year selection, and a separately labeled daily debt balance. Category sums must reconcile with official totals before being returned.
@@ -64,7 +68,7 @@ See [the initial audit](docs/AUDIT.md), [verification evidence](docs/VERIFICATIO
 
 The HTTP layer has per-attempt timeouts, bounded retries for transient errors, Retry-After handling, response-size limits, request coalescing, and a bounded 15-minute process-local cache. Errors are not cached or replaced with successful empty data. No stale-on-error records are served. `status: live` means a successful official-source retrieval, which may be cached; use `retrievedAt` rather than treating that status as a real-time guarantee. Source inventory is explicitly not a health check.
 
-This release uses read-through ingestion, with no database or background crawler. PostgreSQL/Prisma would be appropriate for durable snapshots, change history, reconciliation, saved views, or scheduled imports; none is needed to pretend the current explorer has persistence. Cache state is independent per server process and disappears on restart.
+Read-through ingestion now supports private Vercel Blob snapshots/shared caching and a protected daily ingestion job; see PHASE2.md. Without explicit storage configuration, the application reports memory-only operation. A durable filesystem backend is available on persistent Node hosts, never as a durability claim for Vercel /tmp. PostgreSQL/Prisma would be appropriate for durable snapshots, change history, reconciliation, saved views, or scheduled imports; none is needed to pretend the current explorer has persistence. Cache state is independent per server process and disappears on restart.
 
 ## Deploy
 
@@ -82,4 +86,4 @@ No database, migration, or user credential is required. Hosting/deployment itsel
 
 Federal and state records are not combined into a grand total: federal transfers can appear on both sides. Federal FY starts October 1; NJ FY starts July 1. Budgets, appropriations, obligations, awards, actual expenditures, debt, and forecasts are different measures.
 
-Congress.gov discovery remains unverified with a real API key. NJ structured legislation/votes and procurement ingestion, parsed NJ budget/fiscal-note amounts, automatic district lookup, personal tax estimates, durable ingestion, and operational monitoring remain incomplete. An official estimate link is not a normalized fiscal-impact calculation. A missing source field is not zero, and a missing roll-call reference is not evidence that no vote occurred.
+Credentialed Congress.gov discovery remains unverified with a real key, but keyless GovInfo discovery works. The added NJ legislation/votes, current finances, purchasing, document extraction, district lookup, tax illustration, storage, and ingestion/health features are detailed in PHASE2.md. Independent bank-settlement verification, statewide audited reconciliation, unified contract-level procurement, and federal/state transfer consolidation remain outside the verified data scope. An official estimate link is not a normalized fiscal-impact calculation. A missing source field is not zero, and a missing roll-call reference is not evidence that no vote occurred.
