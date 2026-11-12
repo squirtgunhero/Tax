@@ -1,0 +1,53 @@
+import { fetch as upstreamFetch, EnvHttpProxyAgent } from 'undici';
+import { z } from 'zod';
+
+export class DataError extends Error {
+  constructor(public code: string, message: string, public status = 502) { super(message); }
+}
+const dispatcher = process.env.HTTPS_PROXY || process.env.HTTP_PROXY ? new EnvHttpProxyAgent() : undefined;
+const cache = new Map<string, { value: unknown; expires: number }>();
+const pending = new Map<string, Promise<unknown>>();
+export const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+// Bounded process-local cache; failures never become successful cached responses.
+export async function cached<T>(key: string, ttl: number, load: () => Promise<T>): Promise<T> {
+  const hit = cache.get(key);
+  if (hit && hit.expires > Date.now()) return hit.value as T;
+  if (pending.has(key)) return pending.get(key) as Promise<T>;
+  const job = load().then(value => {
+    if (cache.size >= 200) cache.delete(cache.keys().next().value!);
+    cache.set(key, { value, expires: Date.now() + ttl }); return value;
+  }).finally(() => pending.delete(key));
+  pending.set(key, job); return job;
+}
+export async function request(url: string, init: { method?: string; body?: string } = {}, asText = false, transport = upstreamFetch, pause = sleep): Promise<unknown> {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    let response;
+    try {
+      response = await transport(url, { ...init, headers: { Accept: asText ? 'application/xml,text/html' : 'application/json', ...(init.body ? { 'Content-Type': 'application/json' } : {}) }, dispatcher, signal: AbortSignal.timeout(12000), redirect: 'error' });
+    } catch {
+      if (attempt < 2) { await pause(250 * 2 ** attempt); continue; }
+      throw new DataError('NETWORK_ERROR', 'Official source could not be reached. Try again later.', 503);
+    }
+    if (!response.ok) {
+      await response.body?.cancel();
+      if ((response.status === 429 || response.status >= 500) && attempt < 2) {
+        const retry = response.headers.get('retry-after');
+        const ms = retry ? (/^\d+$/.test(retry) ? Number(retry) * 1000 : Date.parse(retry) - Date.now()) : 250 * 2 ** attempt;
+        // Do not retry sooner than requested; return if waiting exceeds the request budget.
+        if (ms > 3000) throw new DataError('RATE_LIMITED', 'Official source is busy. Retry later.', 503);
+        await pause(Math.max(0, ms || 250)); continue;
+      }
+      throw new DataError(`UPSTREAM_${response.status}`, `Official source returned HTTP ${response.status}.`, response.status === 404 ? 404 : 502);
+    }
+    const text = await response.text();
+    if (text.length > 8_000_000) throw new DataError('RESPONSE_TOO_LARGE', 'Source response exceeds ingestion limit.');
+    if (asText) return text;
+    try { return JSON.parse(text); } catch { throw new DataError('INVALID_JSON', 'Official source did not return valid JSON.'); }
+  }
+  throw new DataError('UNAVAILABLE', 'Official source unavailable.', 503);
+}
+export async function json<T>(url: string, schema: z.ZodType<T>, init?: { method?: string; body?: string }): Promise<T> {
+  const parsed = schema.safeParse(await request(url, init));
+  if (!parsed.success) throw new DataError('SCHEMA_CHANGED', 'Official source response no longer matches the expected schema.');
+  return parsed.data;
+}
